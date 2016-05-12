@@ -7,12 +7,13 @@ class TeachersController < ApplicationController
     @teachers = Teacher.all
 
     render json: @teachers
+    params
   end
 
   # GET /teachers/1
   # GET /teachers/1.json
   def show
-    render json: @teacher
+    render json: {name: @teacher.name, badges: @teacher.badges}
   end
 
   # POST /teachers
@@ -50,7 +51,7 @@ class TeachersController < ApplicationController
   private
 
     def set_teacher
-      @teacher = Teacher.find(params[:id])
+      @teacher = Teacher.find_by(name: params[:name])
     end
 
     def teacher_params
